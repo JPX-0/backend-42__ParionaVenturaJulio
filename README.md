@@ -53,10 +53,11 @@ _- Para crear una cuenta "admin" debe colocar admin. antes de su correo, por eje
 
 _- Para testear las respuestas via email o sms, se recomienda registrarse con una cuenta y números válidas._
 
+_- Antes de ejecutar [npm run test-http] o [npm run test-axios], primero debe ejecutar [npm start] y mantenerlo ejecutando mientras realizar los test._
+
 
 ## **Recomendaciones 💬** 
   * _Leer el archivo env.md para ver mas detalles a considerar._
-  * _Antes de ejecutar [npm run test-http] o [npm run test-axios], primero debe ejecutar [npm start] y mantenerlo ejecutando mientras realizar los test._
 
 
 # Entrega de desafío:
