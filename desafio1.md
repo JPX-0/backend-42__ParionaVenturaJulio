@@ -4,16 +4,16 @@
 
 * Asegurarse de dejar al servidor bien estructurado con su ruteo / controlador, negocio, validaciones, persistencia y configuraciones (preferentemente utilizando en la codificación clases de ECMAScript).
   - ruteo:
-    > Ubicación: "./src/routers/"
+    > Ubicación: "./routers/"
   - controlador:
-    > Ubicación: "./src/controllers/"
+    > Ubicación: "./controllers/"
   - negocio:
-    > Ubicación: "./src/main.js"
+    > Ubicación: "./main.js"
   - validaciones:
-    > Ubicación: "./src/models/services"
+    > Ubicación: "./services/"
   - persistencia:
-    > Ubicación: "./src/models/daos"
+    > Ubicación: "./models/daos/"
   - configuraciones:
-    > Ubicación: "./src/utils/config"
+    > Ubicación: "./utils/config/"
 
 * No hace falta realizar un cliente ya que utilizaremos tests para verificar el correcto funcionamiento de las funcionalidades desarrolladas.

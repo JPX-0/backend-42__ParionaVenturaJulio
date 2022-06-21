@@ -6,6 +6,7 @@
   "scripts": {
     "start": "set NODE_ENV=production && set PORT=8080 && node .",
     "dev": "set NODE_ENV=development && set PORT=3001 && nodemon .",
+    "test-axios": "node test/axios.test.js",
     "test-http": "mocha test/index.test.js",
     "test-crud": "mocha test/products.test.js"
   },
@@ -13,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "chai": "^4.3.6",
     "compression": "^1.7.4",

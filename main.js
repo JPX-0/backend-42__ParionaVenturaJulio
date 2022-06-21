@@ -5,6 +5,7 @@ const passport = require("./middlewares/passport.middleware");
 
 const env = require("./utils/config/env.config");
 const dbConfig = require("./utils/config/db.config");
+const cors = require("cors");
 
 const { Server: HttpServer } = require("http");
 
@@ -22,7 +23,7 @@ const mainServer = () => {
   // configuro el servidor
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  // app.use(cors());
+  app.use(cors());
 
   app.use(session({
     name: env.SESSION_NAME,

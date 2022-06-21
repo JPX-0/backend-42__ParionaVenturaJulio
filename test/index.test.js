@@ -2,11 +2,8 @@ const daosFactory = require("../models/daos/daos.factory");
 const request = require("supertest")("http://localhost:8080");
 const expect = require("chai").expect;
 const should  = require("chai").should();
-// const env = require("../utils/config/env.config");
-
 
 describe("TEST PRODUCTS - methods HTTP", () => {
-  let user; // se instancia el dao de Products.
   const testing = {}; // recibe un id de el producto a testear.
   const response = { // se genera las condiciones para el reporte.
     post: { login: false, newProduct: false }, 
@@ -14,13 +11,12 @@ describe("TEST PRODUCTS - methods HTTP", () => {
     put: false, 
     delete: false 
   };
-  let accounts = {
+  const accounts = {
     admin: { username: "admin.new@test.com", password: "test" }, // usuario Admin
     user: { username: "new@test.com", password: "test" }, // usuario Común
     x: { username: "not@registered.com", password: "password" } // usuario no registrado
   };
   let cookie;
-  before(async () => daosFactory().user);
 
   describe('method: [POST]', () => {
     it("Logeo + redireccion a la página de productos", async () => {
@@ -46,6 +42,7 @@ describe("TEST PRODUCTS - methods HTTP", () => {
       }
     });
   });
+
   describe('method: [GET]', () => {
     it("Deberia ingresar a la pagina de productos logeado", async () => {
       const products = await request.get(`/api/data/product/get`)
@@ -55,6 +52,7 @@ describe("TEST PRODUCTS - methods HTTP", () => {
       if(products.body) response.get = true;
     });
   });
+
   describe('method: [PUT]', () => {
     it("Deberia actualizar un producto solo el admin", async () => {
       console.log(`ROUTE >>> /api/data/product/put/${testing._id}`);
@@ -65,6 +63,7 @@ describe("TEST PRODUCTS - methods HTTP", () => {
       if(updated.body.response) response.put = true;
     });
   });
+
   describe('method: [DELETE]', () => {
     it("Deberia eliminar un producto solo el admin", async () => {
       const deleted = await request.delete(`/api/data/product/delete/${testing._id}`)
@@ -74,11 +73,12 @@ describe("TEST PRODUCTS - methods HTTP", () => {
       if(deleted.body) response.delete = true;
     });
   });
+
   after(() => console.log(`
   TEST HTTP FINISHED!
     >> [POST]: ${(response.post.login && response.post.newProduct) ? "✔" : "❌"} 
     >> [GET]: ${response.get ? "✔" : "❌"} 
     >> [PUT]: ${response.put ? "✔" : "❌"} 
     >> [DELETE]: ${response.delete ? "✔" : "❌"} 
-`));
+  `));
 });

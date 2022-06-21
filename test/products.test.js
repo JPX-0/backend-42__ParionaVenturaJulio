@@ -28,6 +28,7 @@ describe("TEST PRODUCTS - SUITE", () => {
       }
     });
   });
+
   describe("method: [GET]", () => {
     it("Deberia leer todos los productos", async () => {
       const allProducts = await product.getAll();
@@ -42,6 +43,7 @@ describe("TEST PRODUCTS - SUITE", () => {
       if(productFound) response.get.one = true;
     });
   });
+
   describe("method: [PUT]", () => {
     it("Deberia actualizar un producto", async () => {
       const valueToUpdate = { title: "product test 1 - updated" };
@@ -52,6 +54,7 @@ describe("TEST PRODUCTS - SUITE", () => {
       if(oldProduct.title != newProduct.title) response.put = true;
     });
   });
+  
   describe("method: [DELETE]", () => {
     it("Deberia eliminar un producto", async () => {
       await product.deleteById(testing._id);
@@ -60,6 +63,7 @@ describe("TEST PRODUCTS - SUITE", () => {
       if(!productDeletd) response.delete = true;
     });
   });
+
   after(() => console.log(`
     TEST SUITE FINISHED!
       >> [POST]: ${response.post ? "✔" : "❌"} 
