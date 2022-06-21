@@ -12,7 +12,7 @@ describe("TEST PRODUCTS - SUITE", () => {
   };
   before(() => product = daosFactory().product);
 
-  describe("method: POST", () => {
+  describe("method: [POST]", () => {
     it("Deberia guardar un producto", async () => {
       const savedProduct = await product.save({ 
         title: "product test 1",
@@ -28,7 +28,7 @@ describe("TEST PRODUCTS - SUITE", () => {
       }
     });
   });
-  describe("method: GET", () => {
+  describe("method: [GET]", () => {
     it("Deberia leer todos los productos", async () => {
       const allProducts = await product.getAll();
       assert.strictEqual(Array.isArray(allProducts), true);
@@ -42,7 +42,7 @@ describe("TEST PRODUCTS - SUITE", () => {
       if(productFound) response.get.one = true;
     });
   });
-  describe("method: PUT", () => {
+  describe("method: [PUT]", () => {
     it("Deberia actualizar un producto", async () => {
       const valueToUpdate = { title: "product test 1 - updated" };
       const oldProduct = await product.getById(testing._id);
@@ -52,7 +52,7 @@ describe("TEST PRODUCTS - SUITE", () => {
       if(oldProduct.title != newProduct.title) response.put = true;
     });
   });
-  describe("method: DELETE", () => {
+  describe("method: [DELETE]", () => {
     it("Deberia eliminar un producto", async () => {
       await product.deleteById(testing._id);
       const productDeletd = await product.getById(testing._id);

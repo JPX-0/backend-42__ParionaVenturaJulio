@@ -11,7 +11,6 @@ class ProductServices {
 
   generate(req) {
     const { body, query } = req;
-    console.log({ body, query });
     if(body) return req.body;
     if(query) return req.query;
     throw new Error("Sorry, we cannot understand what you are requesting.");

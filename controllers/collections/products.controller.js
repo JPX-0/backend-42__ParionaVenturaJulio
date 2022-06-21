@@ -43,7 +43,7 @@ class ProductController {
       const validateData = ProductController.validate.format(updatedData);
       if(validateData) {
         await ProductController.repo.update(validateReq.id, new UpdateDTO(updatedData));
-        return res.status(STATUS.ACEPTED.code).json(`${validateReq.id}`);
+        return res.status(STATUS.ACEPTED.code).json({ response: true });
       }
     }
     catch(error) {
