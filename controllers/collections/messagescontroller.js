@@ -6,9 +6,6 @@ const STATUS = require('../../utils/constants/api.constants');
 class MessageController {
   static repo = new Repository().message;
   static validate = new Service().message;
-  constructor() {
-		console.log("CLASS: MessageController");
-  }
 
   async getData(req, res, next) {
     const { query, params } = req;

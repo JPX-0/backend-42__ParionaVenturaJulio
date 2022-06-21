@@ -1,9 +1,9 @@
-const DAOFactory = require("../../daos/daos.factory");
+const daosFactory = require("../../daos/daos.factory");
 
 class MessageRepository {
 	constructor() {
-		this.message = DAOFactory().message;
-		this.user = DAOFactory().user;
+		this.message = daosFactory().message;
+		this.user = daosFactory().user;
 	}
 
 	async getData(data) {

@@ -1,6 +1,6 @@
-const DAOFactory = require("../../models/daos/daos.factory");
+const daosFactory = require("../../models/daos/daos.factory");
 
-const userDao = DAOFactory().user;
+const userDao = daosFactory().user;
 
 const serializeApi = (user, done) => {
   console.log("Inside serializer");

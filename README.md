@@ -19,9 +19,13 @@ npm start
 ```
 npm run dev
 ```
-* [TEST] - usando node.
+* [TEST] - usando mocha, chai y supertest.
 ```
-npm run test
+npm run test-http
+```
+* [TEST] - usando mocha.
+```
+npm run test-crud
 ```
 
 

@@ -1,6 +1,5 @@
 const CreateDTO = require('../../models/dtos/create.dto');
 const StandardizeDTO = require('../../models/dtos/standardize.dto');
-const UpdateDTO = require('../../models/dtos/update.dto');
 const Repository = require('../../models/repositories/index.repository');
 const Service = require('../../services/index.service');
 const STATUS = require('../../utils/constants/api.constants');
@@ -8,9 +7,6 @@ const STATUS = require('../../utils/constants/api.constants');
 class UserController {
   static repo = new Repository().user;
   static validate = new Service().user;
-  constructor() {
-		console.log("CLASS: UserController");
-  }
 
   async getData(req, res, next) {
     try {

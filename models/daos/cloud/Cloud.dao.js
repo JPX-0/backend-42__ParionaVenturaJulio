@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const dbConfig = require("../../../utils/config/db.config");
 const env = require("../../../utils/config/env.config");
 
-const MessageMongoDao = require("./mongo/collections/Messagesdao");
-const ProductMongoDao = require("./mongo/collections/Products.dao");
-const UserMongoDao = require("./mongo/collections/Users.dao");
+const MessageMongoDao = require("./mongo/collections/messagesdao");
+const ProductMongoDao = require("./mongo/collections/products.dao");
+const UserMongoDao = require("./mongo/collections/users.dao");
 
 class CloudDAOs {
   static #dbInstances = {};
@@ -27,8 +27,8 @@ class CloudDAOs {
   };
 
   static #getDao = (collection) => {
-    const Schema = require(`../../schemas/${CloudDAOs.#typeDB}/${collection[0].toUpperCase() + collection.substring(1)}.schema`);
-    return CloudDAOs.#DAO[collection][CloudDAOs.#typeDB](collection, Schema);
+    const schema = require(`../../schemas/${CloudDAOs.#typeDB}/${collection}.schema`);
+    return CloudDAOs.#DAO[collection][CloudDAOs.#typeDB](collection, schema);
   };
 
   constructor(type) {
@@ -43,8 +43,7 @@ class CloudDAOs {
       CloudDAOs.#dbInstances.mongo = this;
       return this;
     } else if(!CloudDAOs.#dbInstances.firebase && type == "firebase") {
-      // falta connección
-      CloudDAOs.#dbInstances.firebase = this;
+      // NO IMPLEMENTADO
     }
     else return CloudDAOs.#dbInstances[type];
   }

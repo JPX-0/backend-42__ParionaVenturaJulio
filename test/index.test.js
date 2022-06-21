@@ -1,55 +1,43 @@
-const DAOFactory = require("../models/daos/daos.factory");
-const assert = require('node:assert').strict;
+const daosFactory = require("../models/daos/daos.factory");
+const request = require("supertest")("http://localhost:8080");
+const expect = require("chai").expect;
+// const should  = require("chai").should();
+// const env = require("../utils/config/env.config");
 
-describe("TEST PROUCTS", () => {
-  let product;
-  let testing = {};
-  let response = { post: false, get: { all: false, one: false }, put: false, delete: false };
-  before(() => product = DAOFactory().product);
 
-  describe("method: POST", () => {
+describe("TEST PRODUCTS - methods HTTP", () => {
+  let user; // se instancia el dao de Products.
+  const testing = {}; // recibe un id de el producto a testear.
+  const response = { // se genera las condiciones para el reporte.
+    post: false, 
+    get: { all: false, one: false }, 
+    put: false, 
+    delete: false 
+  };
+  let account = { username: "admin.new@test.com", password: "test" };
+  let cookie;
+  before(async () => daosFactory().user);
+
+  describe('method: [POST]', () => {
+    it("Logeo + redireccion a la página de productos", async () => {
+      const response = await request.post("/api/auth/login").send(account);
+      cookie = response.headers["set-cookie"];
+      expect(response.status).to.eql(302);
+      expect(response.header['location']).to.eql('/api/data/product/get');
+    });
     it("Deberia guardar un producto", async () => {
-      const savedProduct = await product.save({ 
+      const response = await request.post("/api/data/product/post").set('Cookie', cookie).send({
         title: "product test 1",
         price: 10,
         thumbnail: "https://comunidad.retorn.com/wp-content/uploads/cache/2018/09/gatitos/3008811440.jpg",
-        createdAt: Date.now(),
-        updatedAt: Date.now()
       });
-      assert.strictEqual(typeof savedProduct, "object")
-      if(savedProduct) {
-        testing._id = await savedProduct._id;
-        response.post = true;
-      }
+      expect(response.status).to.eql(201);
     });
   });
-  describe("method: GET", () => {
-    it("Deberia leer todos los productos", async () => {
-      const allProducts = await product.getAll();
-      assert.strictEqual(Array.isArray(allProducts), true);
-      assert.strictEqual(allProducts.length >= 0, true);
-      response.get.all = true;
-    });
-    it(`Deberia leer un producto (el que se acaba de crear)}`, async () => {
-      const productFound = await product.getById(testing._id);
-      assert.strictEqual(typeof productFound, "object");
-      assert.deepStrictEqual(productFound._id, testing._id);
-      response.get.one = true;
-    });
-  });
-  // describe("method: PUT", () => {
-  //   it("Deberia actualizar un producto, ejemplo: 62b0f1fe66d6076ba999a61d", async () => {
-  //     const productFound = await product.getById("62b0f1fe66d6076ba999a61d");
-  //     const updatedProduct = await product.updateById("62b0f1fe66d6076ba999a61d", { title: "product test 1 - updated" });
-  //     console.log("updatedProduct: ", updatedProduct);
-  //     assert.deepStrictEqual(updatedProduct.title != productFound.title, true);
+  // describe('method: [GET]', () => {
+  //   it("Deberia ingresar a la pagina de productos logeado", async () => {
+  //     const response = await request.get(`/api/data/product/get`).set('Cookie', cookie)
+  //     expect(Array.isArray(response.body)).to.eql(true);
   //   });
   // });
-  after(() => console.log(`
-    TEST FINISHED!
-      >> [POST]: ${response.post ? "✔" : "❌"} 
-      >> [GET]: ${(response.get.all && response.get.one) ? "✔" : "❌"} 
-      >> [PUT]: ${response.put ? "✔" : "❌"} 
-      >> [DELETE]: ${response.delete ? "✔" : "❌"} 
-  `));
 });

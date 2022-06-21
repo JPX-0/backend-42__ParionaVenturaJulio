@@ -1,18 +1,20 @@
 {
-  "name": "clase-40-tarea",
+  "name": "clase-42-tarea",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "set NODE_ENV=production && set PORT=8080 && node .",
     "dev": "set NODE_ENV=development && set PORT=3001 && nodemon .",
-    "test": "mocha"
+    "test-http": "mocha test/index.test.js",
+    "test-crud": "mocha test/products.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "chai": "^4.3.6",
     "compression": "^1.7.4",
     "connect-mongo": "^4.5.0",
     "cors": "^2.8.5",
@@ -28,6 +30,7 @@
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
     "socket.io": "^4.4.1",
+    "supertest": "^6.2.3",
     "twilio": "^3.77.1",
     "uuid": "^8.3.2"
   },

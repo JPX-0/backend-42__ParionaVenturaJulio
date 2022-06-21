@@ -8,9 +8,6 @@ const STATUS = require('../../utils/constants/api.constants');
 class ProductController {
   static repo = new Repository().product;
   static validate = new Service().product;
-  constructor() {
-		console.log("CLASS: ProductController");
-  }
 
   async getData(req, res, next) {
     try {
@@ -27,7 +24,7 @@ class ProductController {
     try {
       const validateReq = ProductController.validate.generate(req);
       const validateData = ProductController.validate.format(validateReq);
-      const dataStandar = new StandardizeDTO([validateData]).product;
+      const dataStandar = new StandardizeDTO([validateReq]).product;
       if(validateData) {
         const response = await ProductController.repo.save(new CreateDTO(dataStandar));
         return res.status(STATUS.CREATED.code).json(`${response}`);

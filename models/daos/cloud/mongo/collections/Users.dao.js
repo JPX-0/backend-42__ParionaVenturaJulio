@@ -12,7 +12,7 @@ class UserMongoDao extends ContainerMongo {
   }
 
   async getByEmail(email) {
-    const response = await this.model.ReadOne({ email }, { __v: 0 }).lean();
+    const response = await this.model.readOne({ email }, { __v: 0 });
     return response;
   }
 }

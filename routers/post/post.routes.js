@@ -10,27 +10,26 @@ class Routes {
     this.productController = new Controller().product;
     this.messageController = new Controller().message;
     this.userController = new Controller().user;
-		console.log("CLASS: PostRoutes");
   }
 
   get auth() {
     router.post('/login', passport.authenticate("login", { 
       failureRedirect: "/login-error",
-      successRedirect: "/home"
+      successRedirect: "/api/data/product/get"
     }));
     router.post('/register', passport.authenticate("register", { 
       failureRedirect: "/register-error",
-      successRedirect: "/home"
+      successRedirect: "/api/data/product/get"
     }));
     return router;
   }
 
   get product() {
-    router.get(`/product/get`, this.productController.getData);
-    router.get(`/product/get/:idProd`, this.productController.getData);
-    router.post(`/product/post`, isAdmin, this.productController.postData);
-    router.put(`/product/put/:idProd`, isAdmin, this.productController.putData);
-    router.delete(`/product/delete/:idProd`, isAdmin, this.productController.deleteData);
+    router.get(`/product/get`, auth, this.productController.getData);
+    router.get(`/product/get/:idProd`, auth, this.productController.getData);
+    router.post(`/product/post`, [auth, isAdmin], this.productController.postData);
+    router.put(`/product/put/:idProd`, auth, this.productController.putData);
+    router.delete(`/product/delete/:idProd`, auth, this.productController.deleteData);
     return router;
   }
 

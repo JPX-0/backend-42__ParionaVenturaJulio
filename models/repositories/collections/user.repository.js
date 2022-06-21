@@ -1,8 +1,8 @@
-const DAOFactory = require("../../daos/daos.factory");
+const daosFactory = require("../../daos/daos.factory");
 
 class UserRepository {
 	constructor() {
-		this.user = DAOFactory().user;
+		this.user = daosFactory().user;
 	}
 
 	async getData(data) {
