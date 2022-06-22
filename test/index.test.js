@@ -54,7 +54,6 @@ describe("TEST PRODUCTS - methods HTTP", () => {
 
   describe('method: [PUT]', () => {
     it("Deberia actualizar un producto solo el admin", async () => {
-      console.log(`ROUTE >>> /api/data/product/put/${testing._id}`);
       const updated = await request.put(`/api/data/product/put/${testing._id}`)
         .set("Cookie", (cookie || "no-cookie"))
         .send({ title: "product test 1 - actualizado" });
