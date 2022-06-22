@@ -1,4 +1,3 @@
-const daosFactory = require("../models/daos/daos.factory");
 const request = require("supertest")("http://localhost:8080");
 const expect = require("chai").expect;
 const should  = require("chai").should();

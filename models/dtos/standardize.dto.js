@@ -1,4 +1,10 @@
 class StandardizeDTO {
+  static #dataLocation = [
+    { code: "(+51)", prefix: "pe", country: "Perú" },
+    { code: "(+54)", prefix: "arg", country: "Argentina" },
+    { code: "(+34)", prefix: "esp", country: "España" },
+    { code: "(+57)", prefix: "co", country: "Colombia" }
+  ];
   constructor(data) {
     const dataParsed = [];
     for (let i = 0; i < data.length; i++) {
@@ -19,10 +25,16 @@ class StandardizeDTO {
   }
   get user() {
     return {
+      avatar: this.data.avatar,
       firstname: this.data.firstname,
       lastname: this.data.lastname,
-      email: this.data.email,
-      password: this.data.password
+      email: this.data.userEmail,
+      password: this.data.password,
+      location: StandardizeDTO.#dataLocation
+        .find(e => this.data.location.split(" ")[0].toLowerCase() == e.prefix).country,
+      phone: `${StandardizeDTO.#dataLocation
+        .find(e => this.data.location.split(" ")[0].toLowerCase() == e.prefix).code} ${req.body.phone}`,
+      admin: this.data.userEmail.split(".")[0] == "admin" ? true : false,
     };
   }
 

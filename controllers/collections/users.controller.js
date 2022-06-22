@@ -29,8 +29,9 @@ class UserController {
   }
 
   async postData(req, userEmail, password) {
-    const validateReq = ProductController.validate.generate(req);
-    const dataStandar = new StandardizeDTO([validateReq, userEmail, password]).product;
+    const validateReq = UserController.validate.generate(req);
+    UserController.validate.preFormat(validateReq);
+    const dataStandar = new StandardizeDTO([validateReq, userEmail, password]).user;
     const validateData = UserController.validate.format(dataStandar);
     if(validateData) return await UserController.repo.save(new CreateDTO(dataStandar));
   }

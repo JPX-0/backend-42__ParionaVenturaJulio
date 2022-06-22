@@ -14,11 +14,9 @@ class Routes {
 
   get auth() {
     router.post('/login', passport.authenticate("login", { 
-      failureRedirect: "/login-error",
       successRedirect: "/api/data/product/get"
     }));
     router.post('/register', passport.authenticate("register", { 
-      failureRedirect: "/register-error",
       successRedirect: "/api/data/product/get"
     }));
     return router;
@@ -28,8 +26,8 @@ class Routes {
     router.get(`/product/get`, auth, this.productController.getData);
     router.get(`/product/get/:idProd`, auth, this.productController.getData);
     router.post(`/product/post`, [auth, isAdmin], this.productController.postData);
-    router.put(`/product/put/:idProd`, auth, this.productController.putData);
-    router.delete(`/product/delete/:idProd`, auth, this.productController.deleteData);
+    router.put(`/product/put/:idProd`, [auth, isAdmin], this.productController.putData);
+    router.delete(`/product/delete/:idProd`, [auth, isAdmin], this.productController.deleteData);
     return router;
   }
 

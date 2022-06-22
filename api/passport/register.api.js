@@ -7,6 +7,7 @@ const salt = async () => await bcrypt.genSalt(10);
 const createHash = async (password) => await bcrypt.hash(password, await salt());
 
 const registerApi = async (req, userEmail, password, done) => {
+  console.log({ req, userEmail, password });
   try {
     const newUser = await userController.postData(req, userEmail, { password: await createHash(password) });
     return done(null, newUser);

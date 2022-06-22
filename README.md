@@ -53,7 +53,18 @@ _- Para crear una cuenta "admin" debe colocar admin. antes de su correo, por eje
 
 _- Para testear las respuestas via email o sms, se recomienda registrarse con una cuenta y números válidas._
 
-_- Antes de ejecutar [npm run test-http] o [npm run test-axios], primero debe ejecutar [npm start] y mantenerlo ejecutando mientras realizar los test._
+_- Antes de cualquier test debe registrar 2 usuarios, principalmente conteniendo los siguientes datos:_
+  - [ADMIN]:
+  ```
+    { username: "admin.new@test.com", password: "test" }
+  ```
+  - [COMMON USER]:
+  ```
+    { username: "new@test.com", password: "test" }
+  ```
+  > Para registrar las cuentas mencionadas debe ingresar a uno de mis desafios anteriores, por ejemplo: ["clase 40 - tarea"](https://github.com/JPX-0/backend-40__ParionaVenturaJulio/tree/main/desafio%20clase%2040), ejecutar la aplicación y registrar los datos. Una vez registrado los datos puede parar la ejecución de la aplicacion "clase 40 - tarea" y ejecutar la de hoy: "clase 42 - tarea"
+
+_- Antes de ejecutar [npm run test-http] o [npm run test-axios], primero debe ejecutar [npm start] y mantenerlo ejecutando mientras realiza los test._
 
 
 ## **Recomendaciones 💬** 
